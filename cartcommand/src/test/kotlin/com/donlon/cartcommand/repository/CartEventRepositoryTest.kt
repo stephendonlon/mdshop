@@ -15,16 +15,13 @@ internal class CartEventRepositoryTest() {
 
     @Test
     fun testSaveCartEvent() {
-        // Create a CartEvent
         val cartId = "testCartId"
         val payload = "testPayload"
         val createdTime = LocalDateTime.now()
         val cartEvent = CartEvent(cartId = cartId, payload = payload, createdTime = createdTime)
 
-        // Save the CartEvent to the repository
         val savedCartEvent = cartEventRepository.save(cartEvent).block()
 
-        // Verify the saved CartEvent
         assertNotNull(savedCartEvent)
         assertNotNull(savedCartEvent?.id)
         assertEquals(cartId, savedCartEvent?.cartId)
