@@ -1,5 +1,6 @@
 package com.donlon.cartcommand.service.model
 
+import com.donlon.cartcommand.kafka.CartEventProducer
 import com.donlon.cartcommand.repository.CartEventRepository
 import com.donlon.cartcommand.service.CartCommandServiceImpl
 import com.donlon.cartcommand.service.model.event.Action
@@ -25,7 +26,9 @@ class CartCommandServiceImplTest {
     private val cartEventRepository: CartEventRepository = mock()
     private val objectMapper = ObjectMapper.getDefault()
     private val uuidGenerator: UUIDGenerator = mock()
-    private val cartCommandService = CartCommandServiceImpl(cartEventRepository, objectMapper, uuidGenerator)
+    private val cartEventProducer: CartEventProducer = mock()
+    private val cartCommandService =
+        CartCommandServiceImpl(cartEventRepository, objectMapper, uuidGenerator, cartEventProducer)
 
     @Test
     fun `test addToNewCart`() {
@@ -39,6 +42,7 @@ class CartCommandServiceImplTest {
         )
 
         whenever(cartEventRepository.save(any())).thenReturn(Mono.just(cartEvent))
+        whenever(cartEventProducer.sendCartEvent(any(), any())).thenReturn(Mono.just(cartEvent))
 
         val result = cartCommandService.addToNewCart(command).block()
 
@@ -59,6 +63,7 @@ class CartCommandServiceImplTest {
         )
 
         whenever(cartEventRepository.save(any())).thenReturn(Mono.just(cartEvent))
+        whenever(cartEventProducer.sendCartEvent(any(), any())).thenReturn(Mono.just(cartEvent))
 
         val result = cartCommandService.update(command, cartId).block()
 

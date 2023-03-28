@@ -1,5 +1,6 @@
 package com.donlon.cartcommand.service
 
+import com.donlon.cartcommand.kafka.CartEventProducer
 import com.donlon.cartcommand.repository.CartEventRepository
 import com.donlon.cartcommand.service.model.CartCommand
 import com.donlon.cartcommand.service.model.event.CartEvent
@@ -13,7 +14,8 @@ import java.time.LocalDateTime
 class CartCommandServiceImpl(
     private val cartEventRepository: CartEventRepository,
     private val objectMapper: ObjectMapper,
-    private val uuidGenerator: UUIDGenerator
+    private val uuidGenerator: UUIDGenerator,
+    private val cartEventProducer: CartEventProducer
 ) : CartCommandService {
 
     override fun addToNewCart(cartCommand: CartCommand): Mono<CartEvent> {
@@ -37,6 +39,10 @@ class CartCommandServiceImpl(
             createdTime = LocalDateTime.now()
         )
 
-        return cartEventRepository.save(cartEvent)
+        return cartEventRepository.save(cartEvent).flatMap { savedEvent -> sendEventToKafka(savedEvent) }
+    }
+
+    private fun sendEventToKafka(cartEvent: CartEvent): Mono<CartEvent> {
+        return cartEventProducer.sendCartEvent(cartEvent.cartId, cartEvent)
     }
 }
