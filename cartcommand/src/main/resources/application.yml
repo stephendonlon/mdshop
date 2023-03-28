@@ -1,0 +1,18 @@
+micronaut:
+  application:
+    name: cartcommand
+r2dbc:
+  datasources:
+    default:
+      dialect: MYSQL
+datasources:
+  default:
+    dialect: MYSQL
+flyway:
+  datasources:
+    default:
+      enabled: true
+netty:
+  default:
+    allocator:
+      max-order: 3

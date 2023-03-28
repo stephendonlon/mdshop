@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.donlon
+testFramework: kotest
+sourceLanguage: kotlin
+buildTool: gradle
+features: [ annotation-api, app-name, flyway, graalvm, gradle, http-client, jdbc-hikari, kafka, kotest, kotlin, kotlin-application, kotlin-build, logback, micronaut-build, micronaut-test-rest-assured, mysql, netty-server, r2dbc, reactor, reactor-http-client, readme, serialization-jackson, shade, test-resources, yaml ]
