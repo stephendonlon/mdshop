@@ -1,60 +1,100 @@
-## Micronaut 3.8.6 Documentation
+# Cart Command Service
 
-- [User Guide](https://docs.micronaut.io/3.8.6/guide/index.html)
-- [API Reference](https://docs.micronaut.io/3.8.6/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/3.8.6/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+This project is a reactive Micronaut application that provides an API for managing shopping cart events. It uses MySQL
+as its database and Kafka for event streaming.
 
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-## Feature micronaut-test-rest-assured documentation
+## Features
 
-- [Micronaut Micronaut-Test REST-assured documentation](https://micronaut-projects.github.io/micronaut-test/latest/guide/#restAssured)
+- Create a new shopping cart
+- Update the contents of an existing shopping cart
+- Publish cart events to a Kafka topic 
 
-- [https://rest-assured.io/#docs](https://rest-assured.io/#docs)
+## Prerequisites
 
+- JDK 17
+- Docker
+- Docker Compose
 
-## Feature serialization-jackson documentation
+## Getting Started
 
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+1. Clone the repository:
 
+```
+git clone https://github.com/your-username/cart-command.git
+cd cart-command
+```
 
-## Feature flyway documentation
+2. Start the MySQL and Kafka services using Docker Compose:
 
-- [Micronaut Flyway Database Migration documentation](https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html)
+```
+docker-compose up -d
+```
 
-- [https://flywaydb.org/](https://flywaydb.org/)
+3. Build the project:
 
+```
+./gradlew build
+```
 
-## Feature http-client documentation
+4. Run the application:
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+```
+./gradlew run
+```
 
+The application will start on port 8080 by default.
 
-## Feature r2dbc documentation
+## API Endpoints
 
-- [Micronaut R2DBC documentation](https://micronaut-projects.github.io/micronaut-r2dbc/latest/guide/)
+### Create a new shopping cart
 
-- [https://r2dbc.io](https://r2dbc.io)
+POST `/carts`
 
+Request body:
 
-## Feature kafka documentation
+```json
+{
+  "item": {
+    "productId": "product-1",
+    "quantity": 1
+  },
+  "action": "ADD"
+}
+```
 
-- [Micronaut Kafka Messaging documentation](https://micronaut-projects.github.io/micronaut-kafka/latest/guide/index.html)
+Response:
 
+```json
+{
+  "cartId": "generated-cart-id"
+}
+```
 
-## Feature jdbc-hikari documentation
+### Update an existing shopping cart
 
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
+POST `/carts/{cartId}/update`
 
+Request body:
 
-## Feature reactor documentation
+```json
+{
+  "item": {
+    "productId": "product-2",
+    "quantity": 2
+  },
+  "action": "ADD"
+}
+```
 
-- [Micronaut Reactor documentation](https://micronaut-projects.github.io/micronaut-reactor/snapshot/guide/index.html)
+Response: HTTP status 200 (OK)
 
+## Running Tests
 
-## Feature test-resources documentation
+To run the tests, execute the following command:
 
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
+```
+./gradlew test
+```
+This will run both unit and integration tests.
 
 
