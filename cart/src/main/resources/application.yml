@@ -1,7 +1,36 @@
 micronaut:
   application:
     name: cart
+  server:
+    port: 8081
+
+r2dbc:
+  datasources:
+    default:
+      dialect: MYSQL
+      url: r2dbc:mysql://localhost:3306/cart?useSSL=false&allowPublicKeyRetrieval=true
+      username: "myuser"
+      password: "myuserpassword"
+      driver-class-name: dev.miku:r2dbc-mysql.driver
+
+datasources:
+  default:
+    dialect: MYSQL
+    url: jdbc:mysql://localhost:3306/cart?useSSL=false&allowPublicKeyRetrieval=true
+    username: "myuser"
+    password: "myuserpassword"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+
 netty:
   default:
     allocator:
       max-order: 3
+
+kafka:
+  bootstrap:
+    servers: localhost:9092

@@ -70,7 +70,7 @@ micronaut {
     }
     testResources {
         additionalModules.add("r2dbc-mysql")
-        sharedServer = false
+        sharedServer = true
     }
 }
 
