@@ -1,17 +1,16 @@
 package com.donlon.cart.adapter.controller
 
-import com.donlon.cart.infrastructure.persistence.repositories.CartEventRepository
+import com.donlon.cart.application.services.CartService
+import com.donlon.cart.core.domain.Cart
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import reactor.core.publisher.Mono
 
 @Controller("/carts")
-class CartController(private val cartEventRepository: CartEventRepository) {
+class CartController(private val cartService: CartService) {
 
-    @Get("/{cartEventId}")
-    fun getCartEvent(cartEventId: String): Mono<String> {
-        return cartEventRepository.findById(cartEventId.toLong()).map { it.cartId }
+    @Get("/{cartId}")
+    fun getCart(cartId: String): Mono<Cart> {
+        return cartService.getCartById(cartId)
     }
-
-
 }

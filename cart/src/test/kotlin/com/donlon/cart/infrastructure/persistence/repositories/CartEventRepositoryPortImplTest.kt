@@ -1,14 +1,16 @@
 package com.donlon.cart.infrastructure.persistence.repositories
 
+import com.donlon.cart.core.domain.events.Action
 import com.donlon.cart.core.domain.events.CartEvent
+import com.donlon.cart.infrastructure.persistence.entity.ActionEntity
 import com.donlon.cart.infrastructure.persistence.entity.CartEventEntity
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import reactor.core.publisher.Mono
-import java.time.LocalDateTime
 import reactor.test.StepVerifier
+import java.time.LocalDateTime
 
 
 internal class CartEventRepositoryPortImplTest {
@@ -17,10 +19,10 @@ internal class CartEventRepositoryPortImplTest {
 
     @Test
     fun `should save CartEvent`() {
-        val nowTime =  LocalDateTime.now()
+        val nowTime = LocalDateTime.now()
 
-        val cartEvent = CartEvent(1L, "cart-1", "{\"product\": \"item-1\"}", nowTime)
-        val cartEventEntity = CartEventEntity(1L, "cart-1", "{\"product\": \"item-1\"}", nowTime)
+        val cartEvent = CartEvent(1L, "cart-1", "{\"product\": \"item-1\"}", nowTime, Action.ADD)
+        val cartEventEntity = CartEventEntity(1L, "cart-1", "{\"product\": \"item-1\"}", nowTime, ActionEntity.ADD)
 
         whenever(cartEventRepository.save(cartEventEntity)).thenReturn(Mono.just(cartEventEntity))
 

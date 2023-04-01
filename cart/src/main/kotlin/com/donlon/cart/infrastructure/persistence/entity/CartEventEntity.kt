@@ -11,7 +11,7 @@ data class CartEventEntity(
     val id: Long,
     val cartId: String,
     val payload: String,
-
     @field:DateCreated
-    val createdTime: LocalDateTime
+    val createdTime: LocalDateTime,
+    val action: ActionEntity
 )

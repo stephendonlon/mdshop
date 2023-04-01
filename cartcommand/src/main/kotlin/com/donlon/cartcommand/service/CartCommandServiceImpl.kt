@@ -31,12 +31,13 @@ class CartCommandServiceImpl(
         cartCommand: CartCommand,
         cartId: String
     ): Mono<CartEvent> {
-        val commandAsString = objectMapper.writeValueAsString(cartCommand)
+        val commandAsString = objectMapper.writeValueAsString(cartCommand.item)
 
         val cartEvent = CartEvent(
             cartId = cartId,
             payload = commandAsString,
-            createdTime = LocalDateTime.now()
+            createdTime = LocalDateTime.now(),
+            action = cartCommand.command
         )
 
         return cartEventRepository.save(cartEvent).flatMap { savedEvent -> sendEventToKafka(savedEvent) }

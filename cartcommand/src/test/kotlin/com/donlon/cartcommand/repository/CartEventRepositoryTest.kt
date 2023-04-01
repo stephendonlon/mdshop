@@ -1,9 +1,11 @@
 package com.donlon.cartcommand.repository
 
+import com.donlon.cartcommand.service.model.event.Action
 import com.donlon.cartcommand.service.model.event.CartEvent
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -18,7 +20,7 @@ internal class CartEventRepositoryTest() {
         val cartId = "testCartId"
         val payload = "testPayload"
         val createdTime = LocalDateTime.now()
-        val cartEvent = CartEvent(cartId = cartId, payload = payload, createdTime = createdTime)
+        val cartEvent = CartEvent(cartId = cartId, payload = payload, createdTime = createdTime, action = Action.ADD)
 
         val savedCartEvent = cartEventRepository.save(cartEvent).block()
 
@@ -27,6 +29,7 @@ internal class CartEventRepositoryTest() {
         assertEquals(cartId, savedCartEvent?.cartId)
         assertEquals(payload, savedCartEvent?.payload)
         assertEquals(createdTime, savedCartEvent?.createdTime)
+        assertEquals(Action.ADD, savedCartEvent?.action)
     }
 
 }

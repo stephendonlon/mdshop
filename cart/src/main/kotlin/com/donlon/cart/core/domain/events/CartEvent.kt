@@ -8,5 +8,6 @@ data class CartEvent(
     val id: Long,
     val cartId: String,
     val payload: String,
-    val createdTime: LocalDateTime
+    val createdTime: LocalDateTime,
+    val action: Action
 )

@@ -38,7 +38,8 @@ class CartCommandServiceImplTest {
         val cartEvent = CartEvent(
             cartId = CART_1,
             payload = objectMapper.writeValueAsString(item),
-            createdTime = LocalDateTime.now()
+            createdTime = LocalDateTime.now(),
+            action = command.command
         )
 
         whenever(cartEventRepository.save(any())).thenReturn(Mono.just(cartEvent))
@@ -59,7 +60,8 @@ class CartCommandServiceImplTest {
         val cartEvent = CartEvent(
             cartId = cartId,
             payload = objectMapper.writeValueAsString(item),
-            createdTime = LocalDateTime.now()
+            createdTime = LocalDateTime.now(),
+            action = command.command
         )
 
         whenever(cartEventRepository.save(any())).thenReturn(Mono.just(cartEvent))

@@ -5,6 +5,7 @@ CREATE TABLE cart_event
     id           BIGINT AUTO_INCREMENT UNIQUE PRIMARY KEY,
     cart_id      VARCHAR(255) NOT NULL,
     payload      VARCHAR(255) NOT NULL,
-    created_time DATETIME     NOT NULL
+    created_time DATETIME     NOT NULL,
+    action       VARCHAR(255) NOT NULL
 );
 

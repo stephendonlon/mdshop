@@ -15,5 +15,6 @@ data class CartEvent(
     var id: Long? = null,
     val cartId: String,
     val payload: String,
+    val action: Action,
     val createdTime: LocalDateTime,
 )

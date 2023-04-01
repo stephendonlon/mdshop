@@ -1,5 +1,6 @@
 package com.donlon.cart.adapter.kafka.consumer
 
+import com.donlon.cart.core.domain.events.Action
 import com.donlon.cart.core.domain.events.CartEvent
 import com.donlon.cart.core.ports.secondary.CartEventRepositoryPort
 import org.junit.jupiter.api.Test
@@ -16,7 +17,7 @@ internal class CartEventConsumerTest {
     @Test
     fun `should receive and save CartEvent`() {
         val cartId = "cart-1"
-        val cartEvent = CartEvent(1L, cartId, "{\"product\": \"item-1\"}", LocalDateTime.now())
+        val cartEvent = CartEvent(1L, cartId, "{\"product\": \"item-1\"}", LocalDateTime.now(), Action.ADD)
 
         whenever(cartEventRepository.save(cartEvent)).thenReturn(Mono.just(cartEvent))
 

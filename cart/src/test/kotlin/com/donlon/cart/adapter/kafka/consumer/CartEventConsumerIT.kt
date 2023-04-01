@@ -1,6 +1,7 @@
 package com.donlon.cart.adapter.kafka.consumer
 
 import com.donlon.cart.adapter.kafka.testclient.TestCartEventProducer
+import com.donlon.cart.core.domain.events.Action
 import com.donlon.cart.core.domain.events.CartEvent
 import com.donlon.cart.infrastructure.persistence.entity.CartEventEntity
 import com.donlon.cart.infrastructure.persistence.repositories.CartEventRepository
@@ -28,7 +29,7 @@ class CartEventConsumerIT {
         val payload = "{\"product\": \"item-1\"}"
 
         // Sent the CartEvent to Kafka
-        testCartEventProducer.sendCartEvent(cartId, CartEvent(eventId, cartId, payload, LocalDateTime.now()))
+        testCartEventProducer.sendCartEvent(cartId, CartEvent(eventId, cartId, payload, LocalDateTime.now(), Action.ADD))
 
         // Give the consumer some time to process the message
         Thread.sleep(5000)
