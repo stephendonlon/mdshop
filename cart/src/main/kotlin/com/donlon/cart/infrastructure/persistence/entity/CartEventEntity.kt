@@ -1,7 +1,6 @@
 package com.donlon.cart.infrastructure.persistence.entity
 
 import io.micronaut.data.annotation.DateCreated
-import io.micronaut.data.annotation.GeneratedValue
 import io.micronaut.data.annotation.Id
 import io.micronaut.data.annotation.MappedEntity
 import java.time.LocalDateTime
@@ -9,8 +8,7 @@ import java.time.LocalDateTime
 @MappedEntity("cart_event")
 data class CartEventEntity(
     @field:Id
-    @field:GeneratedValue
-    val id: Long? = null,
+    val id: Long,
     val cartId: String,
     val payload: String,
 

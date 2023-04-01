@@ -3,8 +3,10 @@ package com.donlon.cart.infrastructure.persistence.repositories
 import com.donlon.cart.core.domain.events.CartEvent
 import com.donlon.cart.core.ports.secondary.CartEventRepositoryPort
 import com.donlon.cart.infrastructure.persistence.entity.CartEventEntity
+import jakarta.inject.Singleton
 import reactor.core.publisher.Mono
 
+@Singleton
 class CartEventRepositoryPortImpl(private val cartEventRepository: CartEventRepository) : CartEventRepositoryPort {
     override fun save(cartEvent: CartEvent): Mono<CartEvent> {
         val cartEventEntity = cartEvent.toEntity()

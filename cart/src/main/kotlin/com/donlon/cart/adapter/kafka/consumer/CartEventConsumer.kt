@@ -2,13 +2,13 @@ package com.donlon.cart.adapter.kafka.consumer
 
 import com.donlon.cart.core.domain.events.CartEvent
 import com.donlon.cart.core.ports.secondary.CartEventRepositoryPort
-import io.micronaut.configuration.kafka.annotation.KafkaClient
 import io.micronaut.configuration.kafka.annotation.KafkaKey
+import io.micronaut.configuration.kafka.annotation.KafkaListener
 import io.micronaut.configuration.kafka.annotation.Topic
 import jakarta.inject.Singleton
 
 @Singleton
-@KafkaClient
+@KafkaListener
 class CartEventConsumer(private val cartEventRepository: CartEventRepositoryPort) {
 
     @Topic("cart-events")

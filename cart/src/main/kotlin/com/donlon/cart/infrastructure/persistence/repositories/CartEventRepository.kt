@@ -10,6 +10,4 @@ import reactor.core.publisher.Mono
 abstract class CartEventRepository : ReactorPageableRepository<CartEventEntity, Long> {
 
     abstract fun save(cartEvent: CartEventEntity): Mono<CartEventEntity>
-
-
 }

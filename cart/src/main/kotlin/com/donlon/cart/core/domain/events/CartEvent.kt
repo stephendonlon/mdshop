@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Serdeable
 data class CartEvent(
-    val id: Long? = null,
+    val id: Long,
     val cartId: String,
     val payload: String,
     val createdTime: LocalDateTime
