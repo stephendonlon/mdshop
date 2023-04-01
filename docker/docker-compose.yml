@@ -23,9 +23,6 @@ services:
     image: custom-mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: mysecretpassword
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: myuserpassword
-      MYSQL_DATABASE: cart
     ports:
       - '3306:3306'
     command: --default-authentication-plugin=mysql_native_password
