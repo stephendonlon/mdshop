@@ -10,7 +10,7 @@ r2dbc:
       dialect: MYSQL
       url: r2dbc:mysql://localhost:3306/cart?useSSL=false&allowPublicKeyRetrieval=true
       username: "myuser"
-      password: "myuserpassword"
+      password: "mypassword"
       driver-class-name: dev.miku:r2dbc-mysql.driver
 
 datasources:
@@ -18,7 +18,7 @@ datasources:
     dialect: MYSQL
     url: jdbc:mysql://localhost:3306/cart?useSSL=false&allowPublicKeyRetrieval=true
     username: "myuser"
-    password: "myuserpassword"
+    password: "mypassword"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 flyway:
